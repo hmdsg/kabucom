@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'site-packages'))
 
@@ -14,8 +15,17 @@ def get_token():
     payload = {"APIPassword": API_PASSWORD}
 
     try:
-        response = requests.post(API_URL, data=json.dumps(payload).encode("utf8"), headers=headers)
+        response = requests.post(API_URL, data=json.dumps(payload).encode("utf8"), headers=headers)  
+        token = json.loads(response.text).get("Token")
+
     except Exception as e:
         print (e)
+    
+    
 
-    return json.loads(response.text)["Token"]
+    return token
+
+
+#print (API_PASSWORD)
+
+print (get_token())
