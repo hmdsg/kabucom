@@ -18,34 +18,32 @@ def get_token():
 
     try:
         response = requests.post(URL, data=json.dumps(payload).encode("utf8"), headers=headers)  
-        token = json.loads(response.text).get("Token")
-
     except Exception as e:
         print (e)
     
-    return token
+    return json.loads(response.text).get("Token")
 
-def get_board(token):
 
-    URL = API_URL + "/board/9433@1"
+def get_price(token):
+
+    symbol = "9433"
+    exchange = "1"	
+    URL = API_URL + "/board/" + symbol + "@" + exchange
+
     headers = {
         "content-type": "application/json",
         "X-API-KEY": token
     }
 
     try:
-        response = requests.get(URL, headers=headers)  
+        response = requests.get(URL, headers=headers) 
     except Exception as e:
         print (e)
     
-    return json.loads(response.text)
+    return json.loads(response.text).get("price")
 
-print ("始めます")
 
 token = get_token()
-
-print (token)
-
 res = get_board(token)
 
 print (res)
