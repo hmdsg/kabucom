@@ -39,9 +39,3 @@ def get_board(token):
         print (e)
     
     return json.loads(response.text)
-
-
-token = get_token()
-res = get_board(token)
-
-print (res)
