@@ -40,10 +40,10 @@ def get_price(token):
     except Exception as e:
         print (e)
     
-    return json.loads(response.text).get("price")
+    return json.loads(response.text).get("CurrentPrice")
 
 
 token = get_token()
-res = get_board(token)
+res = get_price(token)
 
-print (res)
+print (token)
